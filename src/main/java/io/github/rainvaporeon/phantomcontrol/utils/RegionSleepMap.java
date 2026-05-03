@@ -1,7 +1,6 @@
-package io.github.rainvaporeon.gearpotential.utils;
+package io.github.rainvaporeon.phantomcontrol.utils;
 
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
@@ -26,7 +25,7 @@ public class RegionSleepMap {
      * @param world the world
      * @return days since a player last slept, or {@code 0} if this is first recorded
      */
-    public int getLastPlayerSlept(World world) {
+    public int getLastSleptInWorld(World world) {
         if (worldMap.get(world.getUID()) == null) {
             registerPlayerSlept(world);
             return 0;
@@ -43,9 +42,7 @@ public class RegionSleepMap {
         if (world == null) {
             worldMap.replaceAll((_, day) -> day + 1); return;
         }
-        worldMap.compute(world.getUID(), (id, days) -> {
-            return days == null ? 1 : days + 1;
-        });
+        worldMap.compute(world.getUID(), (_, days) -> days == null ? 1 : days + 1);
     }
 
 }

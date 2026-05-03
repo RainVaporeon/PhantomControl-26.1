@@ -1,0 +1,21 @@
+name: 'PhantomControl'
+description: 'Controls Phantom spawning timer and conditions'
+version: '1.0.0'
+main: 'io.github.rainvaporeon.phantomcontrol.EntryPoint'
+api-version: '26.1'
+author: 'RainVaporeon'
+
+commands:
+  phantom:
+    description: 'Main command'
+    permission: 'phantomcontrol.admin'
+    usage: "/phantom <globalsleep|time [days]>"
+
+permissions:
+  phantomcontrol.*:
+    description: 'Provides all capabilities to PhantomControl.'
+    default: op
+    children:
+      phantomcontrol.admin: true
+  phantomcontrol.admin:
+    description: 'Provides all capabilities to /phantom'
