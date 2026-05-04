@@ -32,4 +32,10 @@ public class PlayerSleepMap {
         return playerMap.get(player.getUniqueId());
     }
 
+    public void tickDayPassing(Player player) {
+        playerMap.compute(player.getUniqueId(), (_, time) -> {
+            if (time == null) return 1;
+            return time + 1;
+        });
+    }
 }

@@ -43,6 +43,7 @@ public class RegionSleepMap {
             worldMap.replaceAll((_, day) -> day + 1); return;
         }
         worldMap.compute(world.getUID(), (_, days) -> days == null ? 1 : days + 1);
+        world.getPlayers().forEach(PlayerSleepMap.DEFAULT::tickDayPassing);
     }
 
 }
