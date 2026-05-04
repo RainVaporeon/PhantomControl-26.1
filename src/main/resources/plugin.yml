@@ -9,7 +9,7 @@ commands:
   phantom:
     description: 'Main command'
     permission: 'phantomcontrol.admin'
-    usage: "/phantom <globalsleep|time [days]>"
+    usage: "/phantom <global|time [days]>"
 
 permissions:
   phantomcontrol.*:
