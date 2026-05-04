@@ -23,14 +23,16 @@ public class MobSpawnHandler implements Listener {
         if (isGlobal) {
             int worldTime = RegionSleepMap.DEFAULT.getLastSleptInWorld(w);
 
-            if (dayThreshold > worldTime) {
+            if (dayThreshold >= worldTime) {
                 event.setShouldAbortSpawn(true);
+                event.setCancelled(true);
             }
         } else {
             int playerTime = PlayerSleepMap.DEFAULT.getLastPlayerSlept(ply);
 
-            if (dayThreshold > playerTime) {
+            if (dayThreshold >= playerTime) {
                 event.setShouldAbortSpawn(true);
+                event.setCancelled(true);
             }
         }
 
