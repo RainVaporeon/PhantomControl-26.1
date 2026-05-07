@@ -173,12 +173,12 @@ public class PhantomControlCommand implements TabExecutor {
         if (args.length == 1) return layer1Args.stream().filter(s -> s.startsWith(args[0])).toList();
         if (args.length == 2 && args[0].equalsIgnoreCase("query")) {
             return Stream.of(
-                    sender.getServer().getWorlds().stream().sorted().map(
+                    sender.getServer().getWorlds().stream().map(
                             world -> String.format("!%s", world.getKey())
-                    ),
-                    ImmutableList.copyOf(sender.getServer().getOnlinePlayers()).stream().sorted().map(
+                    ).sorted(),
+                    ImmutableList.copyOf(sender.getServer().getOnlinePlayers()).stream().map(
                             Player::getName
-                    ),
+                    ).sorted(),
                     Stream.of("@all")
             ).flatMap(Function.identity()).filter(s -> s.startsWith(args[1])).toList();
         }
