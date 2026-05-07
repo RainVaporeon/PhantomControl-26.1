@@ -19,10 +19,18 @@ public class DayPassage {
         r = Bukkit.getScheduler().runTaskTimer(
                 EntryPoint.getInstance(),
                 () -> EntryPoint.getInstance().getServer().getWorlds().forEach(w -> {
-                    if (w.isDayTime() && dayPassageMap.getOrDefault(w.getUID(), false)) {
+                    // ok let's brain this actually
+                    // switching states when day = a day passes
+                    // ok
+                    if (w.isDayTime()) {
+                        // get a true here if we were still in night!
+                        if (dayPassageMap.getOrDefault(w.getUID(), false)) {
+                            RegionSleepMap.DEFAULT.tickDayPassing(w);
+                        }
+                        // set to false now! it'll be false until night
                         dayPassageMap.put(w.getUID(), false);
-                        RegionSleepMap.DEFAULT.tickDayPassing(w);
                     } else {
+                        // it's nighttime! let's set it to true now
                         dayPassageMap.put(w.getUID(), true);
                     }
                 }),
