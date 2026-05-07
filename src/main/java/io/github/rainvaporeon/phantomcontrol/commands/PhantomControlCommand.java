@@ -5,6 +5,7 @@ import io.github.rainvaporeon.phantomcontrol.EntryPoint;
 import io.github.rainvaporeon.phantomcontrol.utils.PlayerSleepMap;
 import io.github.rainvaporeon.phantomcontrol.utils.RegionSleepMap;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+@SuppressWarnings("deprecation") // ignore paper
 public class PhantomControlCommand implements TabExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String[] args) {
@@ -136,7 +138,7 @@ public class PhantomControlCommand implements TabExecutor {
 
         for (World w : worlds) {
             sender.sendMessage(
-                    "[PhantomControl] In world " + w.getName() + NamedTextColor.GRAY + " (" + w.getUID() + ")" + NamedTextColor.WHITE + ":"
+                    "[PhantomControl] In world " + w.getName() + ChatColor.GRAY + " (" + w.getKey() + ")" + ChatColor.RESET + ":"
             );
             sender.sendMessage(
                     "[PhantomControl] Last time a player has slept: " + RegionSleepMap.DEFAULT.getLastSleptInWorld(w) + " days ago."
