@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class DayPassage {
     private static BukkitTask r;
-    // holds True if: Day, and False if: Night
+    // holds True if: Night, and False if: Day
     private static final Map<UUID, Boolean> dayPassageMap = new HashMap<>(4, 0.25F);
 
     public static void init() {
@@ -20,10 +20,10 @@ public class DayPassage {
                 EntryPoint.getInstance(),
                 () -> EntryPoint.getInstance().getServer().getWorlds().forEach(w -> {
                     if (w.isDayTime() && dayPassageMap.getOrDefault(w.getUID(), false)) {
-                        dayPassageMap.put(w.getUID(), true);
+                        dayPassageMap.put(w.getUID(), false);
                         RegionSleepMap.DEFAULT.tickDayPassing(w);
                     } else {
-                        dayPassageMap.put(w.getUID(), false);
+                        dayPassageMap.put(w.getUID(), true);
                     }
                 }),
                 1000,
