@@ -141,12 +141,19 @@ public class PhantomControlCommand implements TabExecutor {
                     "[PhantomControl] In world " + w.getName() + ChatColor.GRAY + " (" + w.getKey() + ")" + ChatColor.RESET + ":"
             );
             sender.sendMessage(
-                    "[PhantomControl] Last time a player has slept: " + RegionSleepMap.DEFAULT.getLastSleptInWorld(w) + " days ago."
+                    "[PhantomControl] Last time a player has slept in the world: " + RegionSleepMap.DEFAULT.getLastSleptInWorld(w) + " days ago."
             );
+            List<Player> ps = w.getPlayers();
+            if (ps.isEmpty()) {
+                sender.sendMessage(
+                        "[PhantomControl] No players are currently in the world."
+                );
+                continue;
+            }
             sender.sendMessage(
                     "[PhantomControl] For players:"
             );
-            for (Player p : w.getPlayers()) {
+            for (Player p : ps) {
                 sender.sendMessage(
                         "- " + p.getName() + ": Last slept " + PlayerSleepMap.DEFAULT.getLastPlayerSlept(p) + " days ago."
                 );
