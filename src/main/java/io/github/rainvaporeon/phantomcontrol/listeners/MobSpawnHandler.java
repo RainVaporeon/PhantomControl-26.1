@@ -20,17 +20,18 @@ public class MobSpawnHandler implements Listener {
 
         int dayThreshold = EntryPoint.getInstance().getConfig().getInt("sleep_time");
 
+        // note: we use -gt since waking up counts a day and i don't want to overcomplicate it
         if (isGlobal) {
             int worldTime = RegionSleepMap.DEFAULT.getLastSleptInWorld(w);
 
-            if (dayThreshold >= worldTime) {
+            if (dayThreshold > worldTime) {
                 event.setShouldAbortSpawn(true);
                 event.setCancelled(true);
             }
         } else {
             int playerTime = PlayerSleepMap.DEFAULT.getLastPlayerSlept(ply);
 
-            if (dayThreshold >= playerTime) {
+            if (dayThreshold > playerTime) {
                 event.setShouldAbortSpawn(true);
                 event.setCancelled(true);
             }
