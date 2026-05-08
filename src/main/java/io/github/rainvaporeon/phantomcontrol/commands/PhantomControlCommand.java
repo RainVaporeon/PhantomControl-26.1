@@ -67,6 +67,11 @@ public class PhantomControlCommand implements TabExecutor {
                 }
                 return true;
             }
+            if ("reload".equalsIgnoreCase(args[0])) {
+                EntryPoint.getInstance().reloadConfig();
+                sender.sendMessage("[PhantomControl] Reloaded!");
+                return true;
+            }
         }
         // args.length >= 2
 
@@ -175,7 +180,7 @@ public class PhantomControlCommand implements TabExecutor {
         return b;
     }
 
-    private static final List<String> layer1Args = List.of("global", "time", "query");
+    private static final List<String> layer1Args = List.of("global", "time", "query", "reload");
     @Override
     public List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String[] args) {
         if (args.length == 0) return layer1Args;
