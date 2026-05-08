@@ -1,6 +1,7 @@
 package io.github.rainvaporeon.phantomcontrol.utils;
 
 import org.bukkit.World;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
@@ -42,6 +43,12 @@ public class RegionSleepMap {
         if (world == null) {
             worldMap.replaceAll((_, day) -> day + 1); return;
         }
+        tickDayPassing0(world);
+    }
+
+    // Ticks the day's passing; ignore empty worlds
+    private void tickDayPassing0(@NonNull World world) {
+        if (world.getPlayers().isEmpty()) return;
         worldMap.compute(world.getUID(), (_, days) -> days == null ? 1 : days + 1);
         world.getPlayers().forEach(PlayerSleepMap.DEFAULT::tickDayPassing);
     }
